@@ -1,0 +1,10 @@
+<header class="header">
+  <shared-title title="Todos" />
+  <input
+    class="new-todo"
+    placeholder="What needs to be done?"
+    autofocus
+    (keyup.enter)="addTodo()"
+    [formControl]="txtInput()"
+  >
+</header>

@@ -1,8 +1,28 @@
-<li class="completed">
+<li
+  [class.completed]="todoItemSignal()?.completed"
+  [class.editing]="editSignal()"
+  class="complete"
+>
   <div class="view">
-    <input class="toggle" type="checkbox" checked>
-    <label>Taste JavaScript</label>
-    <button class="destroy"></button>
+    <input
+      class="toggle"
+      type="checkbox"
+      [formControl]="chkComplete"
+    >
+    <label
+      (dblclick)="editing()"
+    >{{ todoItemSignal()?.text }} - {{ todoItemSignal()?.completed }}</label>
+    <button
+      style="border:1px solid red; border-radius: 50%; cursor: pointer"
+      class="destroy"
+      (click)="deleteTodo()"
+    ></button>
   </div>
-  <input class="edit" value="Create a TodoMVC template">
+  <input
+    class="edit"
+    type="text"
+    (blur)="endEdit()"
+    [formControl]="txtInput"
+    #inputText
+  >
 </li>

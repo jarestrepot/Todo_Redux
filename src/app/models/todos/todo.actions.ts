@@ -1,5 +1,6 @@
 
 import { createAction, props } from '@ngrx/store';
+import { EntityTodo } from './EntityTodo';
 
 export const createTodo = createAction('[Todo] Create Todo',
   props<{ text: string }>()
@@ -11,10 +12,10 @@ export const toggleComplete = createAction('[Todo] Toogle Todo',
 );
 
 
-export const editTodo = createAction('[Todo] Toogle Todo',
-  props<{ id: number, text: string }>()
+export const editTodo = createAction('[Todo] Edit Todo',
+  props<{ id:number, text: string }>()
 );
 
-export const deleteTodo = createAction('[Todo] Toogle Todo',
+export const deleteTodo = createAction('[Todo] delete Todo',
   props<{ id: number }>()
 );

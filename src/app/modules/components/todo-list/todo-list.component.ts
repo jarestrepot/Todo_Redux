@@ -10,15 +10,17 @@ import { EntityTodo } from 'src/app/models/todos/EntityTodo';
 })
 export class TodoListComponent implements OnInit {
 
-  public todosList = signal<EntityTodo[]>([]);
-  #store = inject<Store<AppState>>(Store)
+  // public todosList = signal<EntityTodo[]>([]);
+  public todosList: EntityTodo[] = [];
+  #store = inject<Store<AppState>>(Store);
+  constructor( private store: Store<AppState>){}
 
   ngOnInit(): void {
-    this.#store.select('todos').subscribe({
+    this.store.select('todos').subscribe({
       next: (todos: EntityTodo[]) => {
-        this.todosList.set( todos )
+        this.todosList = todos
       },
-      error: (err)  => this.todosList.set( [] )
+      error: (err)  => this.todosList = []
     });
   }
 }

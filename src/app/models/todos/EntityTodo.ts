@@ -9,20 +9,20 @@ export class EntityTodo{
     this.completed = false;
   }
 
-  getText():string{
-    return this.text;
-  }
-  getComplete():boolean{
-    return this.completed;
-  }
-  getId(): number{
-    return this.id;
-  }
-  setText(text:string):void{
-    this.text = text;
-  }
-  setComplete(complete:boolean):void{
-    this.completed = complete;
-  }
+  // getText():string{
+  //   return this.text;
+  // }
+  // getComplete():boolean{
+  //   return this.completed;
+  // }
+  // getId(): number{
+  //   return this.id;
+  // }
+  // setText(text:string):void{
+  //   this.text = text;
+  // }
+  // setComplete(complete:boolean):void{
+  //   this.completed = complete;
+  // }
 
 }

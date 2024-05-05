@@ -11,12 +11,16 @@ import { createTodo } from 'src/app/models/todos/todo.actions';
 })
 export class TodoAddComponent {
 
-  public txtInput = signal<FormControl>(new FormControl('', [Validators.required]));
-  #store = inject(Store) as Store<AppState>;
+  // public txtInput = signal<FormControl>(new FormControl('', [Validators.required]));
+  public txtInput!: FormControl;
+  // #store = inject(Store) as Store<AppState>;
+  constructor(private store: Store<AppState> ){
+    this.txtInput = new FormControl('', Validators.required);
+  }
 
   addTodo(){
-    if( this.txtInput().invalid ) return;
-    this.#store.dispatch( createTodo( this.txtInput().value ) );
-    this.txtInput().reset();
+    if( this.txtInput.invalid ) return;
+    this.store.dispatch( createTodo( this.txtInput.value ) );
+    this.txtInput.reset();
   }
 }

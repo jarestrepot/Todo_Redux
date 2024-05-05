@@ -9,9 +9,10 @@ export const initialState:EntityTodo[] = [
 ]
 export const todoReducer = createReducer(
   initialState,
-  on(createTodo, (state, { text }) => {
-    if( !text ) return state;
-    return [...state, new EntityTodo(text)] as EntityTodo[]
+  on(createTodo, (state, { type, ...value}) => {
+    const values:string = Object.values(value).map(item => item).join('');
+    if (!values ) return state;
+    return [...state, new EntityTodo(values)] as EntityTodo[]
   }),
 
   on( toggleComplete, (state, { id }) => {
@@ -27,7 +28,7 @@ export const todoReducer = createReducer(
     }) as EntityTodo [];
   }),
 
-  on( editTodo, (state, { text, id }) => {
+  on(editTodo, (state, { id, text }) => {
     return state.map((todo: EntityTodo) => {
       if (todo.id === id && text) {
         return {

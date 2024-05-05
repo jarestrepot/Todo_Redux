@@ -1,17 +1,16 @@
 <li
-  [class.completed]="todoItemSignal()?.completed"
+  [class.completed]="todoItem.completed"
   [class.editing]="editSignal()"
-  class="complete"
 >
   <div class="view">
     <input
       class="toggle"
       type="checkbox"
-      [formControl]="chkComplete"
+      [formControl]="chkComplete()"
     >
     <label
       (dblclick)="editing()"
-    >{{ todoItemSignal()?.text }} - {{ todoItemSignal()?.completed }}</label>
+    >{{ todoItem.text }} - {{ todoItem.completed }}</label>
     <button
       style="border:1px solid red; border-radius: 50%; cursor: pointer"
       class="destroy"

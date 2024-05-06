@@ -1,8 +1,8 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { filter } from 'rxjs';
 import * as Actions from 'src/app/filter/filter.actions';
 import { AppState } from 'src/app/interface/app.reducer';
+import { cleatTodoCompleted } from 'src/app/models/todos/todo.actions';
 
 @Component({
   selector: 'app-todo-footer',
@@ -15,6 +15,7 @@ export class TodoFooterComponent implements OnInit {
   validFilters = signal<Actions.validFilter[]>(['all', 'completed', 'pending']);
   #store = inject(Store) as Store<AppState>;
   itemLeft = signal<number>(0);
+  taskCompleted = signal<boolean>(false);
 
   ngOnInit(): void {
     this.#store.select('filtres').subscribe( {
@@ -23,12 +24,17 @@ export class TodoFooterComponent implements OnInit {
     this.#store.subscribe( ({ filtres, todos }) => {
       this.currentFilter.set( filtres as Actions.validFilter );
       this.itemLeft.set(todos.filter(({ completed }) => !completed ).length );
+      this.taskCompleted.set( (todos.findIndex( ({ completed }) => completed) !== -1) )
     })
   }
 
   changedFilter( filtro: Actions.validFilter): void {
     if (this.currentFilter() === filtro ) return;
     this.#store.dispatch( Actions.setFilterAction({ filtro }) );
+  }
+
+  clearTodo() {
+    this.#store.dispatch( cleatTodoCompleted() );
   }
 
 }

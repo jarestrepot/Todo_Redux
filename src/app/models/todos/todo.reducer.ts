@@ -41,6 +41,7 @@ export const todoReducer = createReducer(
     }) as EntityTodo [];
   }),
 
-  on( Actions.deleteTodo, (state, { id }) =>  state.filter( todo => todo.id !== id ))
+  on( Actions.deleteTodo, (state, { id }) =>  state.filter( todo => todo.id !== id )),
+  on( Actions.cleatTodoCompleted, ( state ) => state.filter( ({ completed }) => !completed))
 );
 

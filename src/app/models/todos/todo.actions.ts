@@ -1,6 +1,4 @@
-
 import { createAction, props } from '@ngrx/store';
-import { EntityTodo } from './EntityTodo';
 
 export const createTodo = createAction('[Todo] Create Todo',
   props<{ text: string }>()
@@ -19,3 +17,5 @@ export const editTodo = createAction('[Todo] Edit Todo',
 export const deleteTodo = createAction('[Todo] delete Todo',
   props<{ id: number }>()
 );
+
+export const cleatTodoCompleted = createAction('[Todo] Clear Todo');

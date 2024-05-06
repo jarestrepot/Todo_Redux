@@ -11,5 +11,9 @@
       >{{ filter|titlecase }}</a>
     </li>
   </ul>
-  <button class="clear-completed">Clear completed</button>
+  <button
+    *ngIf="taskCompleted()"
+    class="clear-completed"
+    (click)="clearTodo()"
+  >Clear completed</button>
 </footer>

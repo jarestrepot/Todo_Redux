@@ -14,10 +14,15 @@ export class TodoFooterComponent implements OnInit {
   currentFilter = signal<Actions.validFilter>('all');
   validFilters = signal<Actions.validFilter[]>(['all', 'completed', 'pending']);
   #store = inject(Store) as Store<AppState>;
+  itemLeft = signal<number>(0);
 
   ngOnInit(): void {
     this.#store.select('filtres').subscribe( {
       next: (filter) => this.currentFilter.set(filter as Actions.validFilter),
+    })
+    this.#store.subscribe( ({ filtres, todos }) => {
+      this.currentFilter.set( filtres as Actions.validFilter );
+      this.itemLeft.set(todos.filter(({ completed }) => !completed ).length );
     })
   }
 

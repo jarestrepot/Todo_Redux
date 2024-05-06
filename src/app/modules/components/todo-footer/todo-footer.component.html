@@ -4,14 +4,14 @@
   <span class="todo-count"><strong>0</strong> item left</span>
   <!-- Remove this if you don't implement routing -->
   <ul class="filters">
-    <li>
-      <a class="selected" routerLink="./">All</a>
-    </li>
-    <li>
-      <a routerLink="./active">Active</a>
-    </li>
-    <li>
-      <a routerLink="./completed">Completed</a>
+    <li
+      *ngFor="let filter of validFilters()"
+      (click)="changedFilter( filter )"
+    >
+      <a
+        routerLink="./"
+        [class.selected]="filter === currentFilter()"
+      >{{ filter|titlecase }}</a>
     </li>
   </ul>
   <!-- Hidden if no completed items are left ↓ -->

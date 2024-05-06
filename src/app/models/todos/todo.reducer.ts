@@ -1,6 +1,6 @@
-import { createReducer, on, Action } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { EntityTodo } from './EntityTodo';
-import { createTodo, deleteTodo, editTodo, toggleComplete } from './todo.actions';
+import * as Actions from './todo.actions';
 
 export const initialState:EntityTodo[] = [
   new EntityTodo('Aprender Java'),
@@ -9,13 +9,13 @@ export const initialState:EntityTodo[] = [
 ]
 export const todoReducer = createReducer(
   initialState,
-  on(createTodo, (state, { type, ...value}) => {
+  on(Actions.createTodo, (state, { type, ...value}) => {
     const values:string = Object.values(value).map(item => item).join('');
     if (!values ) return state;
     return [...state, new EntityTodo(values)] as EntityTodo[]
   }),
 
-  on( toggleComplete, (state, { id }) => {
+  on( Actions.toggleComplete, (state, { id }) => {
     return state.map( (todo:EntityTodo) => {
       if( todo.id === id ){
         return {
@@ -28,7 +28,7 @@ export const todoReducer = createReducer(
     }) as EntityTodo [];
   }),
 
-  on(editTodo, (state, { id, text }) => {
+  on( Actions.editTodo, (state, { id, text }) => {
     return state.map((todo: EntityTodo) => {
       if (todo.id === id && text) {
         return {
@@ -41,6 +41,6 @@ export const todoReducer = createReducer(
     }) as EntityTodo [];
   }),
 
-  on( deleteTodo, (state, { id }) =>  state.filter( todo => todo.id !== id ))
+  on( Actions.deleteTodo, (state, { id }) =>  state.filter( todo => todo.id !== id ))
 );
 

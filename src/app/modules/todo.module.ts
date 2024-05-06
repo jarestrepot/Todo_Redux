@@ -12,6 +12,7 @@ import { HomePageComponent } from './home-page.component';
 // import { CompletedComponent } from './pages/completed/completed.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FilterPipe } from '../pipes/todo/filter.pipe';
 
 
 
@@ -22,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     TodoItemComponent,
     TodoListComponent,
     HomePageComponent,
+    FilterPipe,
   ],
   imports: [
     CommonModule,

@@ -1,9 +1,8 @@
 <ul
   class="todo-list"
 >
-  <!-- `editing` when editing and `completed` -->
   <app-todo-item
-    *ngFor="let todo of todosList"
+    *ngFor="let todo of todosList|filterTodo:filterTodo()"
     [todoItem]="todo"
   />
 </ul>
